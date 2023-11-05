@@ -1,0 +1,5 @@
+ID	fixed.acidity	volatile.acidity	citric.acid	residual.sugar	chlorides	free.sulfur.dioxide	total.sulfur.dioxide	density	pH	sulphates	alcohol	class
+N1	6	0.5	0	1.4	0.057	15	26	0.99448	3.36	0.45	9.5	0
+N2	7.2	0.41	0.3	2.1	0.083	35	72	0.997	3.44	0.52	9.4	0
+N3	10.1	0.38	0.5	2.4	0.104	6	13	0.99643	3.22	0.65	11.6	1
+N4	7.8	0.48	0.68	1.7	0.415	14	32	0.99656	3.09	1.06	9.1	1
