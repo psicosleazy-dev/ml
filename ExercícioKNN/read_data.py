@@ -9,7 +9,7 @@ def read(nome_arquivo):
 
     # Agora, você pode trabalhar com a tabela como um DataFrame
     # Por exemplo, para imprimir as primeiras 5 linhas:
-    print(tabela.head())
+    # print(tabela.head())
 
     '''
     # Para acessar uma coluna específica, use o nome da coluna:
@@ -23,5 +23,6 @@ def read(nome_arquivo):
     y = tabela['Class']
 
     X = tabela.drop("Class", axis=1)
+    X = tabela.drop("ID", axis=1)
 
     return X,y
