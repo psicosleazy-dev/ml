@@ -1,6 +1,6 @@
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.datasets import load_iris
 
 # Carregar o conjunto de dados Iris como exemplo
@@ -25,10 +25,4 @@ y_pred = knn_model.predict(X_test)
 # Calcular a acurácia
 accuracy = accuracy_score(y_test, y_pred)
 
-print(f'Acurácia do modelo kNN: {accuracy:.2f}')
 
-print(f'X: {X}')
-print(f'y: {y}')
-
-print(f"Nomes dos atributos: {feature_names}\n")
-print(f"Nomes das classes: {target_names}")

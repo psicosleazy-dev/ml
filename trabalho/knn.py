@@ -34,6 +34,18 @@ print(f'Acurácia do modelo kNN: {accuracy:.2f}')
 #print(f"Nomes dos atributos: {feature_names}\n")
 #print(f"Nomes das classes: {target_names}")
 
-import seaborn as sns
+'''import seaborn as sns
 cm = confusion_matrix(y_test, y_pred)
 sns.heatmap(cm, annot=True, fmt='d')
+'''
+
+import matplotlib.pyplot as plt
+from sklearn.metrics import ConfusionMatrixDisplay
+cm = confusion_matrix(y_test,y_pred)
+print(cm)
+print(accuracy)
+print(y)
+color = 'white'
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=knn_model.classes_)
+disp.plot()
+plt.show()

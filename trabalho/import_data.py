@@ -8,7 +8,7 @@ X = heart_disease.data.features
 y = heart_disease.data.targets 
   
 # metadata 
-print(heart_disease.metadata) 
+# print(heart_disease.metadata) 
   
 # variable information 
 print(heart_disease.variables) 
