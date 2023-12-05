@@ -33,3 +33,14 @@ y_pred = modelo.predict(X_test)
 # Calculando a acurácia do modelo
 acuracia = accuracy_score(y_test, y_pred)
 print('Acurácia:', acuracia)
+
+import matplotlib.pyplot as plt
+from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y_test, y_pred, labels=modelo.classes_)
+print(cm)
+color = 'white'
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=modelo.classes_)
+disp.plot()
+plt.show()
