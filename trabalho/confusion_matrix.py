@@ -30,6 +30,7 @@ y_pred = knn.predict(X_test)
 # compute accuracy of the model
 knn.score(X_test, y_test)
 
+#plotando matriz de confusao
 import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.metrics import confusion_matrix
