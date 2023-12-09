@@ -137,9 +137,10 @@ best_dt_classifier = dt_opt.best_estimator_
 
 # Dicionário para armazenar os resultados
 results = {}
+best_classifiers = [best_knn_classifier, best_dt_classifier, nb_classifier]
 
 # Loop para avaliar o desempenho de cada classificador
-for classifier, name in zip(classifiers, classifiers_names):
+for classifier, name in zip(best_classifiers, classifiers_names):  # Considerando apenas os dois primeiros classificadores otimizados
     print(f"Validação cruzada {name}...")
     scores = cross_val_score(classifier, X, y.values.ravel(), cv=kf, scoring='accuracy', n_jobs=-1)
     results[name] = scores
@@ -157,11 +158,11 @@ plt.title("Comparação da precisão")
 plt.show()
 
 # Treinando e extraindo a importância das características para kNN e Decision Tree
-knn_classifier.fit(X, y.values.ravel())
-dt_classifier.fit(X, y.values.ravel())
+best_knn_classifier.fit(X, y.values.ravel())
+best_dt_classifier.fit(X, y.values.ravel())
 
 # Obtendo as importâncias das características
-dt_feature_importance = dt_classifier.named_steps['decisiontreeclassifier'].feature_importances_
+dt_feature_importance = best_dt_classifier.named_steps['decisiontreeclassifier'].feature_importances_
 
 # Exibindo a importância das características para Decision Tree
 plt.figure(figsize=(12, 6))
@@ -169,5 +170,6 @@ plt.bar(range(len(dt_feature_importance)), dt_feature_importance, align='center'
 plt.xticks(range(len(dt_feature_importance)), X.columns, rotation=45)  # Use X.columns para obter os nomes das características
 plt.title('Feature Importance - Decision Tree')
 plt.show()
+
 
 
