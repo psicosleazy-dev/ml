@@ -1,0 +1,88 @@
+Relatório de Análise de Modelos Preditivos para Doenças Cardíacas
+
+Resumo:
+
+Este relatório detalha a abordagem, metodologia e resultados de um estudo para desenvolver modelos de aprendizado de máquina destinados a prever a presença ou ausência de doenças cardíacas com base em características clínicas e de exames. Utilizando o conjunto de dados de doenças cardíacas de Cleveland, a análise emprega algoritmos como k-Nearest Neighbors (kNN), Decision Tree e Naive Bayes.
+
+1. Introdução:
+
+O objetivo principal deste trabalho é explorar a capacidade de diferentes algoritmos de aprendizado de máquina na predição de doenças cardíacas. O conjunto de dados de Cleveland, contendo 76 atributos, foi utilizado, com foco em um subconjunto de 14 deles. O "goal" field representa a presença de doença cardíaca, variando de 0 (ausência) a 4. A análise concentra-se na distinção entre presença (valores 1 a 4) e ausência (valor 0).
+
+2. Metodologia:
+
+Pré-processamento de Dados:
+
+Tratamento de valores ausentes utilizando SimpleImputer com estratégia de média.
+Padronização dos dados com StandardScaler.
+Utilização dos 14 atributos selecionados.
+Algoritmos Utilizados:
+
+kNN, Decision Tree, Naive Bayes.
+Hiperparâmetros para kNN:
+
+Os melhores hiperparâmetros para o kNN, encontrados através do processo de otimização, são os seguintes:
+n_neighbors: 7 vizinhos.
+weights: Peso uniforme para vizinhos.
+algorithm: Auto, permitindo a escolha automática do algoritmo mais apropriado.
+Otimização para kNN:
+
+A otimização foi realizada com GridSearchCV, explorando diferentes combinações de n_neighbors, weights, e algorithm.
+A configuração final destaca a preferência por 7 vizinhos, peso uniforme e escolha automática do algoritmo.
+Hiperparâmetros para Decision Tree:
+
+A otimização para a Decision Tree resultou nos seguintes hiperparâmetros ideais:
+criterion: Gini, uma métrica para medir a qualidade da divisão.
+splitter: Random, indicando a escolha aleatória da melhor divisão.
+max_depth: Nenhuma limitação na profundidade da árvore.
+Otimização para Decision Tree:
+
+O GridSearchCV foi aplicado para explorar configurações de criterion, splitter, e max_depth na Decision Tree.
+A escolha de Gini, splitter aleatório e sem limite de profundidade resultou na configuração ideal para este conjunto de dados.
+Observações:
+
+Os hiperparâmetros otimizados refletem escolhas que maximizam a precisão do modelo com base nas características específicas do conjunto de dados.
+A seleção de 7 vizinhos no kNN pode representar uma quantidade apropriada de vizinhos para considerar nas predições.
+Na Decision Tree, a escolha do critério Gini e a aleatoriedade na escolha de divisões podem ser mais adequados para a complexidade do problema.
+
+Utilização de validação cruzada (5-fold) e métricas como precisão, recall, F1-score.
+Análise da variabilidade nos resultados.
+3. Resultados:
+
+Descrição do Conjunto de Dados:
+
+303 linhas, 13 colunas.
+0.2% de valores ausentes.
+93.7% de casos positivos.
+Desempenho dos Modelos:
+
+kNN: Precisão média - 0.581, Desvio padrão - 0.033.
+Decision Tree: Precisão média - 0.498, Desvio padrão - 0.053.
+Naive Bayes: Precisão média - 0.545, Desvio padrão - 0.035.
+Atributos Mais Importantes:
+
+age, colesterol, freq. cardíaca máxima alcançada, thal.
+4. Discussão:
+
+Desempenho dos Algoritmos:
+
+Todos os algoritmos demonstraram capacidade de resolver a tarefa.
+Variação no desempenho durante a validação cruzada.
+Melhor Desempenho:
+
+kNN liderou em precisão média, seguido por Naive Bayes e Decision Tree.
+Estabilidade do kNN evidenciada por menor variabilidade.
+Conclusão:
+
+O kNN se destacou neste conjunto de dados, atingindo uma precisão média superior.
+5. Limitações e Recomendações:
+
+A escolha de métricas pode impactar a avaliação final; recomenda-se seleção alinhada com os objetivos.
+A análise de importância de características deve ser validada clinicamente.
+Otimização de hiperparâmetros pode ser aprimorada para melhorar o desempenho.
+6. Conclusão Geral:
+
+Este estudo fornece uma análise abrangente da aplicação de algoritmos de aprendizado de máquina na predição de doenças cardíacas. Embora o kNN tenha demonstrado ser a escolha mais eficaz neste contexto, considerações específicas do problema e otimizações adicionais podem influenciar a escolha do algoritmo ideal.
+
+7. Referências:
+
+Link do Conjunto de Dados

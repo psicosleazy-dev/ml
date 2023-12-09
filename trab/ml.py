@@ -21,6 +21,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import make_scorer, accuracy_score, precision_score, recall_score, f1_score
+from sklearn.model_selection import GridSearchCV
+
 
 # Carregando o conjunto de dados de doenças cardíacas
 from ucimlrepo import fetch_ucirepo
@@ -36,6 +38,7 @@ percentage_positive_cases = np.mean(y) * 100
 print(f"The data has {total_rows} rows and {total_columns} columns.")
 print(f"The percentage of missing values is: {percentage_missing:.1f}%")
 print(f"Percentage of positive cases: {percentage_positive_cases:.1f}%\n")
+
 
 
 # Visualizando informações sobre o target (y) no conjunto de dados
@@ -85,6 +88,8 @@ nb_classifier = make_pipeline(
 classifiers = [knn_classifier, dt_classifier, nb_classifier]
 classifiers_names = ['kNN', 'Decision Tree', 'Naive Bayes']
 
+
+
 # Definindo as métricas de desempenho
 scoring_metrics = {
     'accuracy': make_scorer(accuracy_score),
@@ -95,6 +100,40 @@ scoring_metrics = {
 
 # Configurando a validação cruzada k-fold
 kf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+
+
+# Hiperparâmetros para o kNN
+knn_param_grid = {
+    'kneighborsclassifier__n_neighbors': [3, 5, 7],
+    'kneighborsclassifier__weights': ['uniform', 'distance'],
+    'kneighborsclassifier__algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute']
+}
+
+# Hiperparâmetros para a Decision Tree
+dt_param_grid = {
+    'decisiontreeclassifier__criterion': ['gini', 'entropy'],
+    'decisiontreeclassifier__splitter': ['best', 'random'],
+    'decisiontreeclassifier__max_depth': [None, 10, 20, 30]
+}
+
+# Otimização de hiperparâmetros para kNN
+knn_opt = GridSearchCV(knn_classifier, knn_param_grid, cv=kf, scoring='accuracy', n_jobs=-1)
+knn_opt.fit(X, y.values.ravel())
+best_knn_params = knn_opt.best_params_
+
+# Otimização de hiperparâmetros para Decision Tree
+dt_opt = GridSearchCV(dt_classifier, dt_param_grid, cv=kf, scoring='accuracy', n_jobs=-1)
+dt_opt.fit(X, y.values.ravel())
+best_dt_params = dt_opt.best_params_
+
+# Exibir os melhores hiperparâmetros encontrados
+print("Melhores hiperparâmetros para kNN:", best_knn_params)
+print("Melhores hiperparâmetros para Decision Tree:", best_dt_params)
+
+# Agora você pode usar os melhores hiperparâmetros encontrados nos classificadores
+best_knn_classifier = knn_opt.best_estimator_
+best_dt_classifier = dt_opt.best_estimator_
+
 
 # Dicionário para armazenar os resultados
 results = {}
