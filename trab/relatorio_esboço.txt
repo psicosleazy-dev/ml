@@ -1,0 +1,57 @@
+Objetivo do Trabalho: Predição de Doenças Cardíacas com Algoritmos de Aprendizado de Máquina
+
+Nosso trabalho tem como objetivo desenvolver modelos de
+ aprendizado de máquina para prever a presença ou ausência de doenças cardíacas em pacientes com base em características clínicas e de exames. 
+ Utilizamos o conjunto de dados de doenças cardíacas de Cleveland, disponível em [https://archive.ics.uci.edu/dataset/45/heart+disease], que contém informações como idade, sexo, pressão arterial, colesterol e outros fatores relevantes.
+
+Pergunta de Pesquisa:
+
+Quais fatores clínicos e de exames têm maior impacto na predição de doenças cardíacas?
+Como diferentes algoritmos de aprendizado de máquina se comparam na precisão da predição?
+
+
+ Atributos usados : 
+age: idade em anos
+sex: sexo (1 = masculino; 0 = feminino)
+cp: tipo de dor no peito
+Valor 1: angina típica
+Valor 2: angina atípica
+Valor 3: dor não anginosa
+Valor 4: assintomático
+trestbps: pressão arterial em repouso (em mm Hg na admissão ao hospital)
+chol: colesterol sérico em mg/dl
+fbs: (glicose no sangue em jejum > 120 mg/dl) (1 = verdadeiro; 0 = falso)
+restecg: resultados eletrocardiográficos em repouso
+    Valor 0: normal
+    Valor 1: anormalidade da onda ST-T (inversões da onda T e/ou elevação ou depressão de > 0.05 mV)
+    Valor 2: mostrando hipertrofia ventricular esquerda provável ou definitiva pelos critérios de Estes
+thalach: frequência cardíaca máxima alcançada
+exang: angina induzida pelo exercício (1 = sim; 0 = não)
+oldpeak: depressão de ST induzida pelo exercício em relação ao repouso
+slope: a inclinação do segmento ST de pico do exercício
+    Valor 1: inclinação ascendente
+    Valor 2: plana
+    Valor 3: inclinação descendente
+ca: número de grandes vasos (0-3) coloridos por fluoroscopia
+thal: 3 = normal; 6 = defeito fixo; 7 = defeito reversível
+num: diagnóstico de doença cardíaca (status angiográfico da doença)
+    Valor 0: < 50% de estreitamento do diâmetro
+    Valor 1: > 50% de estreitamento do diâmetro (em qualquer grande vaso)
+
+
+    caracteristicas dataset : 
+    The data has 303 rows and 13 columns.
+The percentage of missing values is: 0.2%
+Percentage of positive cases: 93.7%
+
+    algoritmos utilizados -> kNN, Arvore de Decisao, Gaussian Naive Bayes
+
+    resultados :
+
+kNN: Precisão média - 0.581, Desvio padrão - 0.033
+Decision Tree: Precisão média - 0.498, Desvio padrão - 0.053
+Naive Bayes: Precisão média - 0.545, Desvio padrão - 0.035
+
+imagens
+
+atributos mais importantes -> age, colesterol, freq. cardiaca maxima alcançada e thal
