@@ -68,6 +68,7 @@ plt.title('Percentage of Presence and No Presence of Heart Disease')
 plt.show()
 
 # Inicializando os classificadores com imputação e padronização no pipeline
+print("inicializando os classificadores...")
 # kNN
 knn_classifier = make_pipeline(
     SimpleImputer(strategy='mean'),  # Imputação de valores ausentes
@@ -92,7 +93,7 @@ classifiers = [knn_classifier, dt_classifier, nb_classifier]
 classifiers_names = ['kNN', 'Decision Tree', 'Naive Bayes']
 
 
-
+print("definido metricas de desempenho...")
 # Definindo as métricas de desempenho
 scoring_metrics = {
     'accuracy': make_scorer(accuracy_score),
@@ -101,8 +102,10 @@ scoring_metrics = {
     'f1': make_scorer(f1_score, average='weighted')
 }
 
+print("configurando k fold...")
+
 # Configurando a validação cruzada k-fold
-kf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+kf = StratifiedKFold(n_splits=8, shuffle=True, random_state=42)
 
 
 # Hiperparâmetros para o kNN
@@ -119,6 +122,7 @@ dt_param_grid = {
     'decisiontreeclassifier__max_depth': [None, 10, 20, 30]
 }
 
+print("otimizando hiperparametros...")
 # Otimização de hiperparâmetros para kNN
 knn_opt = GridSearchCV(knn_classifier, knn_param_grid, cv=kf, scoring='accuracy', n_jobs=-1)
 knn_opt.fit(X, y.values.ravel())
@@ -142,6 +146,7 @@ best_dt_classifier = dt_opt.best_estimator_
 results = {}
 best_classifiers = [best_knn_classifier, best_dt_classifier, nb_classifier]
 
+print("avaliando desempenho...")
 # Loop para avaliar o desempenho de cada classificador
 for classifier, name in zip(best_classifiers, classifiers_names):  # Considerando apenas os dois primeiros classificadores otimizados
     print(f"Validação cruzada {name}...")
