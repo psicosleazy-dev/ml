@@ -55,9 +55,9 @@ Descrição do Conjunto de Dados:
 93.7% de casos positivos.
 Desempenho dos Modelos:
 
-kNN: Precisão média - 0.617, Desvio padrão - 0.041
-Decision Tree: Precisão média - 0.525, Desvio padrão - 0.061
-Naive Bayes: Precisão média - 0.545, Desvio padrão - 0.035
+kNN: Precisão média - 0.581, Desvio padrão - 0.033.
+Decision Tree: Precisão média - 0.498, Desvio padrão - 0.053.
+Naive Bayes: Precisão média - 0.545, Desvio padrão - 0.035.
 Atributos Mais Importantes:
 
 age, colesterol, freq. cardíaca máxima alcançada, thal.

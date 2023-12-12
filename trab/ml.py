@@ -22,6 +22,9 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import make_scorer, accuracy_score, precision_score, recall_score, f1_score
 from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.model_selection import train_test_split    
+
 
 
 # Carregando o conjunto de dados de doenças cardíacas
@@ -172,4 +175,48 @@ plt.title('Feature Importance - Decision Tree')
 plt.show()
 
 
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y.values.ravel(), test_size=0.2, random_state=42)
 
+
+# Fit the best classifiers on the training data
+best_knn_classifier.fit(X_train, y_train)
+best_dt_classifier.fit(X_train, y_train)
+nb_classifier.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred_knn = best_knn_classifier.predict(X_test)
+y_pred_dt = best_dt_classifier.predict(X_test)
+y_pred_nb = nb_classifier.predict(X_test)
+
+# Obtain confusion matrices
+conf_matrix_knn = confusion_matrix(y_test, y_pred_knn)
+conf_matrix_dt = confusion_matrix(y_test, y_pred_dt)
+conf_matrix_nb = confusion_matrix(y_test, y_pred_nb)
+
+# Plotting confusion matrices
+fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+
+# Plot confusion matrix for kNN
+class_labels = ['No disease', 'Mild', 'Moderate', 'Severe', 'Very severe']
+
+
+disp = ConfusionMatrixDisplay.from_estimator(
+    best_dt_classifier, X_test, y_test, display_labels=class_labels, normalize='true')
+disp.ax_.set_title('Confusion Matrix - Decision Tree')
+
+
+disp2 = ConfusionMatrixDisplay.from_estimator(
+    best_knn_classifier, X_test, y_test, display_labels=class_labels, normalize='true')
+disp2.ax_.set_title('Confusion Matrix - KNN')
+
+
+disp3 = ConfusionMatrixDisplay.from_estimator(
+    nb_classifier, X_test, y_test, display_labels=class_labels, normalize='true')
+disp3.ax_.set_title('Confusion Matrix - Naive Bayes')
+
+print(disp.confusion_matrix)
+print(disp2.confusion_matrix)
+print(disp3.confusion_matrix)
+
+plt.show()
