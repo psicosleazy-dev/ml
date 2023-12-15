@@ -138,7 +138,6 @@ for k in ks:
     print("Melhores hiperparâmetros para kNN:", best_knn_params)
     print("Melhores hiperparâmetros para Decision Tree:", best_dt_params)
 
-    # Agora você pode usar os melhores hiperparâmetros encontrados nos classificadores
     best_knn_classifier = knn_opt.best_estimator_
     best_dt_classifier = dt_opt.best_estimator_
 
@@ -149,7 +148,7 @@ for k in ks:
 
     print("avaliando desempenho...")
     # Loop para avaliar o desempenho de cada classificador
-    for classifier, name in zip(best_classifiers, classifiers_names):  # Considerando apenas os dois primeiros classificadores otimizados
+    for classifier, name in zip(best_classifiers, classifiers_names):  
         print(f"Validação cruzada {name}...")
         scores = cross_val_score(classifier, X, y.values.ravel(), cv=kf, scoring='accuracy', n_jobs=-1)
         results[name] = scores
@@ -170,40 +169,34 @@ for k in ks:
     best_knn_classifier.fit(X, y.values.ravel())
     best_dt_classifier.fit(X, y.values.ravel())
 
-    '''
+
     # Obtendo as importâncias das características
     dt_feature_importance = best_dt_classifier.named_steps['decisiontreeclassifier'].feature_importances_
 
     # Exibindo a importância das características para Decision Tree
     plt.figure(figsize=(12, 6))
     plt.bar(range(len(dt_feature_importance)), dt_feature_importance, align='center')
-    plt.xticks(range(len(dt_feature_importance)), X.columns, rotation=45)  # Use X.columns para obter os nomes das características
+    plt.xticks(range(len(dt_feature_importance)), X.columns, rotation=45)  
     plt.title('Feature Importance - Decision Tree')
-    plt.show()'''
+    plt.show()
 
-    # Split the data into training and testing sets
+    # Cálculo das matrizes de confusão
     X_train, X_test, y_train, y_test = train_test_split(X, y.values.ravel(), test_size=0.2, random_state=42)
 
-
-    # Fit the best classifiers on the training data
     best_knn_classifier.fit(X_train, y_train)
     best_dt_classifier.fit(X_train, y_train)
     nb_classifier.fit(X_train, y_train)
 
-    # Make predictions on the test set
     y_pred_knn = best_knn_classifier.predict(X_test)
     y_pred_dt = best_dt_classifier.predict(X_test)
     y_pred_nb = nb_classifier.predict(X_test)
 
-    # Obtain confusion matrices
     conf_matrix_knn = confusion_matrix(y_test, y_pred_knn)
     conf_matrix_dt = confusion_matrix(y_test, y_pred_dt)
     conf_matrix_nb = confusion_matrix(y_test, y_pred_nb)
 
-    # Plotting confusion matrices
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
-    # Plot confusion matrix for kNN
     class_labels = ['No disease', 'Mild', 'Moderate', 'Severe', 'Very severe']
 
 
